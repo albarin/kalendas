@@ -1,0 +1,13 @@
+{
+  "name": "calendar",
+  "autoload": {
+    "psr-4": {
+      "Calendar\\": "src/"
+    }
+  },
+  "require": {
+    "phpoffice/phpword": "^0.13.0",
+    "nesbot/carbon": "^1.21",
+    "dompdf/dompdf": "^0.7.0"
+  }
+}
