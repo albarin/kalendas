@@ -3,9 +3,26 @@
 namespace Calendar\Writers;
 
 use Calendar\CalendarWriter;
+use Calendar\WeekFormatter;
 
 class ConsoleCalendarWriter implements CalendarWriter
 {
+    /**
+     * @var string
+     */
+    private $calendar;
+
+    /**
+     * @var array
+     */
+    private $weeksDays;
+
+    public function __construct()
+    {
+        $this->calendar = '';
+        $this->weeksDays = WeekFormatter::oneLetter();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -17,9 +34,13 @@ class ConsoleCalendarWriter implements CalendarWriter
     /**
      * {@inheritdoc}
      */
-    public function writeWeek($week)
+    public function writeCalendar(array $weeks)
     {
-        echo implode('  ', $week) . "\n";
+        foreach ($weeks as $week) {
+            $this->calendar .= implode('  ', $week) . "\n";
+        }
+
+        echo $this->calendar;
     }
 
     /**
@@ -43,6 +64,6 @@ class ConsoleCalendarWriter implements CalendarWriter
      */
     public function formatDayLabel($day)
     {
-        return str_pad($day, 2, ' ', STR_PAD_LEFT);
+        return str_pad($this->weeksDays[$day], 2, ' ', STR_PAD_LEFT);
     }
 }

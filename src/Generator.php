@@ -13,23 +13,69 @@ class Generator
         $this->writer = $writer;
     }
 
+    /**
+     * @param Carbon $month
+     */
     public function generate(Carbon $month)
     {
         $this->generateTitle($month);
-        $this->generateWeekHeader();
+        $this->generateCalendar($month);
+    }
 
+    /**
+     * @param Carbon $month
+     */
+    private function generateTitle(Carbon $month)
+    {
+        $this->writer->writeTitle($month->format('F Y'));
+    }
+
+    /**
+     * @param Carbon $month
+     */
+    private function generateCalendar(Carbon $month)
+    {
+        $this->writer->writeCalendar(
+            $this->generateWeeks($month)
+        );
+    }
+
+    /**
+     * @param Carbon $month
+     * @return array
+     */
+    private function generateWeeks(Carbon $month)
+    {
+        $weeks[] = $this->generateWeekHeader();
         $weeksInMonth = $this->weeksInMonth($month);
 
         for ($week=0; $week<$weeksInMonth; $week++) {
             $firstDayOfWeek = $this->firstDayOfWeek($month, $week);
 
-            $this->generateWeek($firstDayOfWeek, $month);
+            $weeks[] = $this->generateWeek($firstDayOfWeek, $month);
         }
+
+        return $weeks;
+    }
+
+    /**
+     * @return array
+     */
+    private function generateWeekHeader()
+    {
+        $week = [];
+        for ($day=0; $day<7; $day++) {
+            $week[] = $this->writer->formatDayLabel($day);
+        }
+
+        return $week;
     }
 
     /**
      * @param Carbon $firstDay
      * @param Carbon $month
+     *
+     * @return array
      */
     private function generateWeek(Carbon $firstDay, Carbon $month)
     {
@@ -41,14 +87,14 @@ class Generator
             $firstDay->addDay();
         }
 
-        $this->writer->writeWeek($week);
+        return $week;
     }
 
     /**
      * @param Carbon $day
      * @param Carbon $month
      *
-     * @return mixed
+     * @return string
      */
     private function formatDay(Carbon $day, Carbon $month)
     {
@@ -59,8 +105,9 @@ class Generator
 
     /**
      * @param Carbon $weekDay
-     * @param $month
-     * @param $year
+     * @param int $month
+     * @param int $year
+     *
      * @return bool
      */
     private function isInSameMonth(Carbon $weekDay, $month, $year)
@@ -68,6 +115,11 @@ class Generator
         return ($month === $weekDay->month && $year === $weekDay->year);
     }
 
+    /**
+     * @param Carbon $month
+     *
+     * @return int
+     */
     private function weeksInMonth(Carbon $month)
     {
         $start = $month->copy()->startOfMonth();
@@ -76,24 +128,14 @@ class Generator
         return ($end->weekOfYear - $start->weekOfYear) + 1;
     }
 
+    /**
+     * @param Carbon $month
+     * @param int $week
+     *
+     * @return Carbon
+     */
     private function firstDayOfWeek(Carbon $month, $week)
     {
         return $month->copy()->firstOfMonth()->startOfWeek()->addWeek($week);
-    }
-
-    private function generateWeekHeader()
-    {
-        $days = ['L','M','X','J','V','S','D'];
-
-        foreach ($days as $day) {
-            $header[] = $this->writer->formatDayLabel($day);
-        }
-
-        $this->writer->writeWeek($header);
-    }
-
-    private function generateTitle($month)
-    {
-        $this->writer->writeTitle($month->format('F Y'));
     }
 }

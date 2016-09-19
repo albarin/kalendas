@@ -8,6 +8,7 @@
   "require": {
     "phpoffice/phpword": "^0.13.0",
     "nesbot/carbon": "^1.21",
-    "dompdf/dompdf": "^0.7.0"
+    "dompdf/dompdf": "^0.7.0",
+    "tecnickcom/tcpdf": "^6.2"
   }
 }

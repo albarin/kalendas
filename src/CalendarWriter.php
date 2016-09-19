@@ -10,22 +10,28 @@ interface CalendarWriter
     public function writeTitle($title);
 
     /**
-     * @param array $week
+     * @param array $weeks
      */
-    public function writeWeek($week);
+    public function writeCalendar(array $weeks);
 
     /**
      * @param int $day
+     *
+     * @return string
      */
     public function formatDayLabel($day);
 
     /**
      * @param int $day
+     *
+     * @return string
      */
     public function formatMonthDay($day);
 
     /**
      * @param int $day
+     *
+     * @return string
      */
     public function formatOtherMonthDay($day);
 }
