@@ -1,13 +1,12 @@
 <?php
 
-require_once 'bootstrap.php';
 require 'vendor/autoload.php';
 
-use Calendar\Generator;
-use Calendar\Writers\ConsoleCalendarWriter;
-use Calendar\Writers\OoxmlCalendarWriter;
-use Calendar\Writers\OoxmlWriterConfiguration;
 use Carbon\Carbon;
+use Kalendas\Writers\ConsoleCalendarWriter;
+use Kalendas\Writers\OoxmlCalendarWriter;
+use Kalendas\Writers\OoxmlWriterConfiguration;
+use Kalendas\Generator;
 use PhpOffice\PhpWord\PhpWord;
 
 $generator = new Generator(new ConsoleCalendarWriter());

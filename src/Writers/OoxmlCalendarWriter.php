@@ -1,8 +1,8 @@
 <?php
 
-namespace Calendar\Writers;
+namespace Kalendas\Writers;
 
-use Calendar\CalendarWriter;
+use Kalendas\CalendarWriter;
 use PhpOffice\PhpWord\Element\Section;
 use PhpOffice\PhpWord\Element\Table;
 use PhpOffice\PhpWord\IOFactory;

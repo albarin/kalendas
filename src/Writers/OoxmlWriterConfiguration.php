@@ -1,8 +1,8 @@
 <?php
 
-namespace Calendar\Writers;
+namespace Kalendas\Writers;
 
-use Calendar\WeekFormatter;
+use Kalendas\WeekFormatter;
 
 class OoxmlWriterConfiguration
 {

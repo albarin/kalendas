@@ -1,9 +1,9 @@
 <?php
 
-namespace Calendar\Writers;
+namespace Kalendas\Writers;
 
-use Calendar\CalendarWriter;
-use Calendar\WeekFormatter;
+use Kalendas\CalendarWriter;
+use Kalendas\WeekFormatter;
 
 class ConsoleCalendarWriter implements CalendarWriter
 {

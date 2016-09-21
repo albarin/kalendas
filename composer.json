@@ -1,8 +1,8 @@
 {
-  "name": "calendar",
+  "name": "albarincon/kalendas",
   "autoload": {
     "psr-4": {
-      "Calendar\\": "src/"
+      "Kalendas\\": "src/"
     }
   },
   "require": {
