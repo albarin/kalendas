@@ -33,6 +33,11 @@ class OoxmlCalendarWriter implements CalendarWriter
      */
     private $config;
 
+    /**
+     * @var string
+     */
+    private $title;
+
     public function __construct(PhpWord $writer, OoxmlWriterConfiguration $config)
     {
         $this->writer = $writer;
@@ -46,6 +51,7 @@ class OoxmlCalendarWriter implements CalendarWriter
      */
     public function writeTitle($title)
     {
+        $this->title = $title;
         $this->section->addText(
             "$title\n",
             $this->config->titleStyles(),
@@ -169,7 +175,9 @@ class OoxmlCalendarWriter implements CalendarWriter
 
     private function saveFile()
     {
+        $month = str_replace(' ', '-', $this->title);
+
         $objWriter = IOFactory::createWriter($this->writer, 'Word2007');
-        $objWriter->save('calendar.docx');
+        $objWriter->save("month-{$month}.docx");
     }
 }
