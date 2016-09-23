@@ -6,19 +6,31 @@ use Kalendas\WeekFormatter;
 
 class OoxmlWriterConfiguration
 {
+    const ONE_LETTER = 'oneLetter';
+    const SHORT = 'short';
+    const FULL = 'full';
+
     /**
      * @var array
      */
     private $defaultStyles;
 
+    /**
+     * @var array
+     */
     private $defaultDayFormats;
+
+    /**
+     * @var bool
+     */
+    private $isCustom;
 
     public function __construct()
     {
         $this->defaultDayFormats = [
-            'oneLetter' => WeekFormatter::oneLetter(),
-            'short' => WeekFormatter::short(),
-            'full' => WeekFormatter::full(),
+            self::ONE_LETTER => WeekFormatter::oneLetter(),
+            self::SHORT => WeekFormatter::short(),
+            self::FULL => WeekFormatter::full(),
         ];
 
         $this->defaultStyles = [
@@ -49,7 +61,7 @@ class OoxmlWriterConfiguration
             'weekendCell' => [
                 'bgColor' => 'eaeaea',
             ],
-            'dayFormat' => 'full',
+            'dayFormat' => self::FULL,
         ];
     }
 
@@ -112,6 +124,8 @@ class OoxmlWriterConfiguration
     {
         $this->defaultStyles['dayFormat'] = $format;
 
+        $this->isCustom = true;
+
         return $this;
     }
 
@@ -173,9 +187,20 @@ class OoxmlWriterConfiguration
         return $this->defaultStyles['weekDay'];
     }
 
+    /**
+     * @return array
+     */
     public function dayFormat()
     {
         return $this->defaultDayFormats[$this->defaultStyles['dayFormat']];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCustom()
+    {
+        return $this->isCustom;
     }
 
     /**
@@ -190,6 +215,8 @@ class OoxmlWriterConfiguration
             $this->defaultStyles[$section],
             $styles
         );
+
+        $this->isCustom = true;
 
         return $this;
     }

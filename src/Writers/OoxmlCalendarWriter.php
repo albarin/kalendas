@@ -175,9 +175,21 @@ class OoxmlCalendarWriter implements CalendarWriter
 
     private function saveFile()
     {
+        $objWriter = IOFactory::createWriter($this->writer, 'Word2007');
+        $objWriter->save($this->filename());
+    }
+
+    /**
+     * @return string
+     */
+    public function filename()
+    {
         $month = str_replace(' ', '-', $this->title);
 
-        $objWriter = IOFactory::createWriter($this->writer, 'Word2007');
-        $objWriter->save("month-{$month}.docx");
+        if ($this->config->isCustom()) {
+            return "{$month}-custom.docx";
+        }
+
+        return "{$month}.docx";
     }
 }
