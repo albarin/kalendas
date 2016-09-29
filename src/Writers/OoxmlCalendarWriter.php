@@ -184,7 +184,17 @@ class OoxmlCalendarWriter implements CalendarWriter
      */
     public function filename()
     {
-        $month = str_replace(' ', '-', $this->title);
+        $filename = $this->config->filename();
+        if (!empty($filename)) {
+            return $filename;
+        }
+
+        return $this->defaultFilename();
+    }
+
+    private function defaultFilename()
+    {
+        $month = str_replace(' ', '-', strtolower($this->title));
 
         if ($this->config->isCustom()) {
             return "{$month}-custom.docx";

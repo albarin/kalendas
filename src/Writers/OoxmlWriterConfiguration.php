@@ -25,6 +25,11 @@ class OoxmlWriterConfiguration
      */
     private $isCustom;
 
+    /**
+     * @var string
+     */
+    private $filename;
+
     public function __construct()
     {
         $this->defaultDayFormats = [
@@ -130,6 +135,14 @@ class OoxmlWriterConfiguration
     }
 
     /**
+     * @param string $filename
+     */
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
+    }
+
+    /**
      * @return array
      */
     public function titleStyles()
@@ -193,6 +206,14 @@ class OoxmlWriterConfiguration
     public function dayFormat()
     {
         return $this->defaultDayFormats[$this->defaultStyles['dayFormat']];
+    }
+
+    /**
+     * @return string
+     */
+    public function filename()
+    {
+        return $this->filename;
     }
 
     /**
