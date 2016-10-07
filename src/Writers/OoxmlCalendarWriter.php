@@ -143,7 +143,7 @@ class OoxmlCalendarWriter implements CalendarWriter
      */
     public function formatDayLabel($day)
     {
-        return $this->config->dayFormat()[$day];
+        return $this->config->days()[$day];
     }
 
     /**

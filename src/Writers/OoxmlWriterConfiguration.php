@@ -203,9 +203,17 @@ class OoxmlWriterConfiguration
     /**
      * @return array
      */
-    public function dayFormat()
+    public function days()
     {
         return $this->defaultDayFormats[$this->defaultStyles['dayFormat']];
+    }
+
+    /**
+     * @return array
+     */
+    public function dayFormat()
+    {
+        return $this->defaultStyles['dayFormat'];
     }
 
     /**
