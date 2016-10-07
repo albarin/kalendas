@@ -48,6 +48,7 @@ class OoxmlWriterConfiguration
             'title' => [
                 'size' => 20,
                 'bold' => true,
+                'color' => '000000',
             ],
             'header' => [
                 'size' => 14,
